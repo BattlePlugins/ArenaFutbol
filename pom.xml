@@ -4,7 +4,7 @@
 
     <groupId>mc.euro</groupId>
     <artifactId>ArenaFutbol</artifactId>
-    <version>0.5.3.2</version>
+    <version>0.5.4.0</version>
     <packaging>jar</packaging>
     <name>ArenaFutbol</name>
     <url>https://github.com/BattlePluginsDev/Futbol</url>
