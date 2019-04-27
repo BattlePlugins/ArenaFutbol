@@ -1,12 +1,12 @@
-name: ArenaFutbol
+name: ${project.name}
 main: me.morrango.arenafutbol.FutbolPlugin
-version: 0.5.3.3
-website: https://github.com/BattlePluginsDev/Futbol
+version: ${project.version}
+website: ${project.url}
 author: Morrango
-authors: [Europia79]
+authors: [Europia79, Redned]
 depend: [BattleArena]
 softdepend: [ProtocolLib]
-description: Version 3 of futbol
+description: ${project.description}
 commands:
   futbol:
     description: arena futbol
