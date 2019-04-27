@@ -36,7 +36,7 @@ import org.bukkit.util.Vector;
  */
 public class FutbolPlugin extends JavaPlugin {
     
-    public static Set<Entity> balls = new HashSet<Entity>();
+    public Set<Entity> balls = new HashSet<Entity>();
     public Map<UUID, Vector> vectors = new HashMap<UUID, Vector>();
     private boolean particles = false;
     private Effect particleEffect;
@@ -61,7 +61,7 @@ public class FutbolPlugin extends JavaPlugin {
     }
 
     public void loadConfig() {
-        getConfig().addDefault("particles", Boolean.valueOf(false));
+        getConfig().addDefault("particles", false);
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
         saveConfig();
@@ -82,7 +82,7 @@ public class FutbolPlugin extends JavaPlugin {
             UUID uuid = ball.getUniqueId();
             Vector velocity = ball.getVelocity();
             if (this.vectors.containsKey(uuid)) {
-                velocity = (Vector) this.vectors.get(uuid);
+                velocity = this.vectors.get(uuid);
             }
             Vector newVector = ball.getVelocity();
             if (newVector.getX() == 0.0D) {

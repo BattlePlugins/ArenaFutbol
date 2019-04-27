@@ -85,8 +85,8 @@ public class FutbolArena extends Arena {
     public void onOpen() {
         Set<ArenaPlayer> set = getMatch().getPlayers();
         List<ArenaTeam> teamsList = getTeams();
-        String teamOne = ((ArenaTeam) teamsList.get(0)).getDisplayName();
-        String teamTwo = ((ArenaTeam) teamsList.get(1)).getDisplayName();
+        String teamOne = teamsList.get(0).getDisplayName();
+        String teamTwo = teamsList.get(1).getDisplayName();
         /*
          SScoreboard scoreboard = getMatch().getScoreboard();
          SObjective objective = scoreboard.registerNewObjective("futbolObjective", "totalKillCount", "&6Time", SAPIDisplaySlot.SIDEBAR);
@@ -172,7 +172,7 @@ public class FutbolArena extends Arena {
                 World world = player.getWorld();
                 Vector kickVector = kickVector(player);
                 entity.setVelocity(kickVector);
-                FutbolPlugin.balls.add(entity);
+                plugin.balls.add(entity);
                 world.playEffect(location, Effect.STEP_SOUND, 10);
                 this.kickedBy.put(entity, player);
                 this.kickedBalls.put(entity, getMatch());
@@ -234,13 +234,13 @@ public class FutbolArena extends Arena {
                         FutbolArena.this.canKick.add(team);
                     }
                 }, ballTimer * 20 + 60);
-        this.ballTimers.put(team, Integer.valueOf(task.getTaskId()));
+        this.ballTimers.put(team, task.getTaskId());
     }
 
     private void cancelBallTimer(ArenaTeam team) {
-        Integer timerid = (Integer) this.ballTimers.get(team);
+        Integer timerid = this.ballTimers.get(team);
         if (timerid != null) {
-            Bukkit.getScheduler().cancelTask(timerid.intValue());
+            Bukkit.getScheduler().cancelTask(timerid);
         }
     }
 
@@ -257,25 +257,25 @@ public class FutbolArena extends Arena {
             Block block = loc.getBlock().getRelative(BlockFace.DOWN);
             Material type = block.getType();
             event.setCancelled(true);
-            Match thisMatch = (Match) this.kickedBalls.get(ent);
+            Match thisMatch = this.kickedBalls.get(ent);
             List<ArenaTeam> teamsList = thisMatch.getArena().getTeams();
-            ArenaTeam teamOne = (ArenaTeam) teamsList.get(0);
-            ArenaTeam teamTwo = (ArenaTeam) teamsList.get(1);
+            ArenaTeam teamOne = teamsList.get(0);
+            ArenaTeam teamTwo = teamsList.get(1);
             ArenaTeam scoringTeam = null;
             if ((!type.equals(Material.STONE)) && (!type.equals(Material.COBBLESTONE))) {
                 this.plugin.log(ChatColor.RED + "Set blocks for goals.");
                 return;
             }
             if (type.equals(Material.STONE)) {
-                scoringTeam = (ArenaTeam) teamsList.get(0);
+                scoringTeam = teamsList.get(0);
                 // objective.setPoints(teamOne.getDisplayName(), teamOne.getNKills());
                 createFireWork(center, Color.RED, teamOne.getNKills());
             }
             if (type.equals(Material.COBBLESTONE)) {
-                scoringTeam = (ArenaTeam) teamsList.get(1);
+                scoringTeam = teamsList.get(1);
                 createFireWork(center, Color.BLUE, teamTwo.getNKills());
             }
-            ArenaPlayer scoringPlayer = getAP((Player) this.kickedBy.get(ent));
+            ArenaPlayer scoringPlayer = getAP(this.kickedBy.get(ent));
             // Add kill and send message
             scoringTeam.addKill(scoringPlayer);
             // objective.setPoints(scoringTeam.getDisplayName(), scoringTeam.getNKills());
@@ -283,7 +283,7 @@ public class FutbolArena extends Arena {
             startBallTimer(scoringTeam);
             this.kickedBy.put(ent, null);
 
-            FutbolPlugin.balls.remove(ent);
+            plugin.balls.remove(ent);
             ent.remove();
 
             // Send ball to center
@@ -356,9 +356,9 @@ public class FutbolArena extends Arena {
     }
 
     public void removeBalls(Match match) {
-        Entity ball = (Entity) this.cleanUpList.get(match);
+        Entity ball = this.cleanUpList.get(match);
         if (ball != null) {
-            FutbolPlugin.balls.remove(ball);
+            plugin.balls.remove(ball);
             this.kickedBalls.remove(ball);
             this.kickedBy.remove(ball);
             ball.remove();
