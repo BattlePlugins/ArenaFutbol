@@ -53,7 +53,7 @@ public class FutbolPlugin extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        getServer().getScheduler().cancelAllTasks();
+        getServer().getScheduler().cancelTasks(this);
     }
 
     public void log(String message) {

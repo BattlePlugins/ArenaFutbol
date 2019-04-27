@@ -8,6 +8,7 @@ import java.util.Random;
 import java.util.Set;
 
 import mc.alk.arena.BattleArena;
+import mc.alk.arena.alib.bukkitadapter.MaterialAdapter;
 import mc.alk.arena.competition.match.Match;
 import mc.alk.arena.events.matches.MatchMessageEvent;
 import mc.alk.arena.objects.ArenaPlayer;
@@ -200,7 +201,7 @@ public class FutbolArena extends Arena {
             if (boots.isSimilar(new ItemStack(Material.IRON_BOOTS))) {
                 configPower += 0.4D;
             }
-            if (boots.isSimilar(new ItemStack(Material.GOLD_BOOTS))) {
+            if (boots.isSimilar(new ItemStack(MaterialAdapter.getMaterial("GOLD_BOOTS")))) {
                 configPower += 0.3D;
             }
             if (boots.isSimilar(new ItemStack(Material.CHAINMAIL_BOOTS))) {
