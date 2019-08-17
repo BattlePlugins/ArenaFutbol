@@ -14,8 +14,8 @@
     </properties>
     <repositories>
         <repository>
-            <id>rainbowcraft-repo</id>
-            <url>http://rainbowcraft.sytes.net/maven/repository/</url>
+            <id>battleplugins-repo</id>
+            <url>https://repo.battleplugins.org/artifactory/libs-release-local/</url>
         </repository>
         <repository>
             <id>bukkit-public</id>
@@ -38,7 +38,7 @@
         <dependency>
             <groupId>mc.alk</groupId>
             <artifactId>BattleArena</artifactId>
-            <version>3.9.11.4</version>
+            <version>3.9.14.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -138,9 +138,15 @@
         </plugins>
     </build>
     <distributionManagement>
-      <repository>
-        <id>rainbowcraft-repo</id>
-        <url>scp://rainbowcraft.sytes.net/var/www/maven/repository</url>
-      </repository>
+        <repository>
+            <id>central</id>
+            <name>BattlePlugins Maven Server-releases</name>
+            <url>https://repo.battleplugins.org/artifactory/libs-release-local</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>BattlePlugins Maven Server-snapshots</name>
+            <url>https://repo.battleplugins.org/artifactory/libs-snapshot-local</url>
+        </snapshotRepository>
     </distributionManagement>
 </project>
