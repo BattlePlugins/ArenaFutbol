@@ -118,23 +118,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- Specify how we build the plugin.jar -->
-            <plugin>
-            <artifactId>maven-antrun-plugin</artifactId>
-            <configuration>
-                <tasks>
-                    <copy file="target/ArenaFutbol.jar" tofile="../server/plugins/ArenaFutbol.jar"/>
-                </tasks>
-            </configuration>
-            <executions>
-                <execution>
-                    <phase>package</phase>
-                    <goals>
-                        <goal>run</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
         </plugins>
     </build>
     <distributionManagement>
